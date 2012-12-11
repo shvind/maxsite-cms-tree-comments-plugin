@@ -18,6 +18,7 @@
 		$options['tc_vk_apiid']			= $post['f_tc_vk_apiid'];
 		$options['tc_vk_limit']			= $post['f_tc_vk_limit'];
 		$options['tc_vk_width']			= $post['f_tc_vk_width'];
+		$options['tc_vk_init']			= $post['f_tc_vk_init'];
 		$options['tc_fb_limit']			= $post['f_tc_fb_limit'];
 		$options['tc_fb_width']			= $post['f_tc_fb_width'];
 		$options['tc_form']				= isset( $post['f_tc_form'])		? 1 : 0;
@@ -55,6 +56,7 @@
 		if ( !isset($options['tc_vk_apiid']) )		$options['tc_vk_apiid']		= '';
 		if ( !isset($options['tc_vk_limit']) )		$options['tc_vk_limit']		= '20';
 		if ( !isset($options['tc_vk_width']) )		$options['tc_vk_width']		= '660';
+		if ( !isset($options['tc_vk_init']) )		$options['tc_vk_init']		= '1';
 		if ( !isset($options['tc_fb_limit']) )		$options['tc_fb_limit']		= '20';
 		if ( !isset($options['tc_fb_width']) )		$options['tc_fb_width']		= '660';
 		if ( !isset($options['tc_form']) )			$options['tc_form']			= '0';
@@ -108,8 +110,8 @@
 		$form .= '<br>' . t('Можно задать произвольный формат даты комментария. Примеры: (H:i d/m/Y) и (j F Y в H:i:s)');
 		$form .= '<p><strong>' . t('Формат:') . '</strong> <input name="f_tc_comment_date" type="text" value="' . $options['tc_comment_date'] . '"></p>';
 		
-		$chk3 = $options['tc_comment_ip'] ? ' checked="checked"  ' : '';
-		$form .= '<br><p><label><input name="f_tc_comment_ip" type="checkbox" ' . $chk3 . '> ' . t('Отображать админу IP автора каждого комментария в строке "ник, дата и тд"') . '</label>';
+		$chk = $options['tc_comment_ip'] ? ' checked="checked"  ' : '';
+		$form .= '<br><p><label><input name="f_tc_comment_ip" type="checkbox" ' . $chk . '> ' . t('Отображать админу IP автора каждого комментария в строке "ник, дата и тд"') . '</label>';
 		$form .= '<br>';
 		
 		$form .= '<br><h2>Опции комментариев Вконтакте</h2>';
@@ -122,6 +124,10 @@
 
 		$form .= '<br>' . t('Размер блока комментариев (если не указывать будет 100%)');
 		$form .= '<p><strong>' . t('Ширина:') . '</strong> <input name="f_tc_vk_width" type="text" value="' . $options['tc_vk_width'] . '"></p>';
+		
+		$chk = $options['tc_vk_init'] ? ' checked="checked"  ' : '';
+		$form .= '<br><p><label><input name="f_tc_vk_init" type="checkbox" ' . $chk . '> ' . t('Выводить скрипт инициализации вконтакте. Отключить при конфликте с другими плагинами.') . '</label>';
+		$form .= '<br>';
 		
 		$form .= '<br><h2>Опции комментариев Facebook</h2>';
 
