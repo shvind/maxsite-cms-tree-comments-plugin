@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+﻿<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 	$options = mso_get_option('tree_comments', 'plugins', array() ); // получаем опции
 
 	if (!isset($options['tc_comments_vk'])) $options['tc_comments_vk'] = '0';
@@ -9,7 +9,7 @@
 	if (!isset($options['tc_tabs'])) $options['tc_tabs'] = '1';
 	
 	#echo '</div>';
-	echo '<div class="comments">'; 
+	echo '<div class="comments tabs_widget tabs_widget_99">'; 
 	
 	if ($options['tc_tabs']) {
 		echo '<div class="tabs"><ul class="tabs-nav">';
