@@ -185,8 +185,9 @@
 			js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
 			fjs.parentNode.insertBefore(js, fjs);
 			}(document, "script", "facebook-jssdk"));</script>';
-
-		echo '<div class="fb-comments" data-href="'. $page['page_slug'] .'" data-num-posts="'. $options['tc_comments_fb_limit'] .'" data-width="'. $options['tc_comments_fb_width'] .'"></div>';
+		
+		$url = getinfo('site_url') . 'page/' . $page['page_slug'] ;
+		echo '<div class="fb-comments" data-href="'. $url .'" data-num-posts="'. $options['tc_comments_fb_limit'] .'" data-width="'. $options['tc_comments_fb_width'] .'"></div>';
 		echo '</div>';
 		
 	}
