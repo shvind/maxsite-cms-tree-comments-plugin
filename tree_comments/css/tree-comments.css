@@ -1,0 +1,63 @@
+/*------------- comments tree --------------*/
+
+div.comments ul {
+	overflow: visible;
+	border-bottom: 0;
+}
+
+ ul.tree-comments-level-0 {
+	list-style-type: none;
+	border-bottom: none;
+	border: none;
+	padding: 0;	
+}
+
+ ul.tree-comments-level-0 li {
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+ ul.tree-comments-level-0 ul {
+	border: none;
+	list-style-type: none;
+	display: block;
+}
+
+
+ ul.tree-comments-level-0 li  div.tree-comment {
+	width: 100%;
+	float: left;
+}
+
+ ul.tree-comments-level-0 li  ul.tree-comments-list-childs {
+	margin: 0 0 0 25px;
+	list-style-type: none;
+	
+}
+
+
+
+ div.tree-comment {
+	padding: 5px 2px 8px 2px;
+	margin: 8px 0 10px 0;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+ div.tree-comment-avatar {
+	float: left;
+}
+
+ div.tree-comment-data {
+	float: left;
+}	
+
+ a.comment-form-button {
+	border-bottom: 2px dashed #CCCCCC;
+	cursor: pointer;
+	display: block;
+	float: right;
+}
+
+textarea#comments_content {
+	width: 98%;
+}
