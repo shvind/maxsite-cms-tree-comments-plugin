@@ -2,6 +2,17 @@
 
 mso_cur_dir_lang('templates');
 $options = mso_get_option('tree_comments', 'plugins', array() ); // получаем опции
+
+	if (!isset($options['tc_form_reg'])) $options['tc_form_reg'] = '0';
+	if (!isset($options['tc_compact_form'])) $options['tc_compact_form'] = '0';
+	if (!isset($options['tc_form_nik'])) $options['tc_form_nik'] = '0';
+	if (!isset($options['tc_form_url'])) $options['tc_form_url'] = '0';
+	
+	if (!isset($options['tc_form_text1'])) $options['tc_form_text1'] = 'Используйте нормальные имена. Можно использовать @twitter-name. ';
+	if (!isset($options['tc_form_text2'])) $options['tc_form_text2'] = 'Если вы уже зарегистрированы как комментатор или хотите зарегистрироваться, укажите пароль и свой действующий email. При регистрации на указанный адрес придет письмо с кодом активации и ссылкой на ваш персональный аккаунт, где вы сможете изменить свои данные, включая адрес сайта, ник, описание, контакты и т.д., а также подписку на новые комментарии.';
+	if (!isset($options['tc_form_text3'])) $options['tc_form_text3'] = 'Авторизация: ';
+	if (!isset($options['tc_form_text4'])) $options['tc_form_text4'] = 'Не регистрировать/аноним';
+	if (!isset($options['tc_form_text5'])) $options['tc_form_text5'] = 'Зарегистрирован или новая регистрация';
 ?>
 
 <div class="comment-form">
@@ -18,8 +29,8 @@ $options = mso_get_option('tree_comments', 'plugins', array() ); // получа
 				<?php if ($allow_comment_anonim = mso_get_option('allow_comment_anonim', 'general', '1') ) { ?>
 				
 				<?php if ($options['tc_compact_form']) { ?>	
-					<p class="radio" style="float:left;"><label><input type="radio" name="comments_reg" id="comments_reg_1" value="noreg" checked="checked"> <?=t('Не регистрировать/аноним')?></label></p>
-					<p class="radio right" style="float:right;"><label><input type="radio" name="comments_reg" id="comments_reg_2" value="reg"> <?=t('Зарегистрирован или новая регистрация')?></label></p>
+					<p class="radio" style="float:left;"><label><input type="radio" name="comments_reg" id="comments_reg_1" value="noreg" <?php if (!$options['tc_form_reg']) echo 'checked="checked"'; ?>> <? echo $options['tc_form_text4']; ?></label></p>
+					<p class="radio" style="float:right;"><label><input type="radio" name="comments_reg" id="comments_reg_2" value="reg" <?php if ($options['tc_form_reg']) echo 'checked="checked"'; ?>> <? echo $options['tc_form_text5']; ?></label></p>
 					<div style="clear:both"></div>
 				<?php } ?>
 				
@@ -27,7 +38,7 @@ $options = mso_get_option('tree_comments', 'plugins', array() ); // получа
 						
 					<?php if (mso_get_option('allow_comment_comusers', 'general', '1')) { ?>
 						<?php if (!$options['tc_compact_form']) { ?>
-						<p class="radio"><label><input type="radio" name="comments_reg" id="comments_reg_1" value="noreg" checked="checked"> <?=t('Не регистрировать/аноним')?></label></p>
+						<p class="radio"><label><input type="radio" name="comments_reg" id="comments_reg_1" value="noreg" <?php if (!$options['tc_form_reg']) echo 'checked="checked"'; ?>> <? echo $options['tc_form_text4']; ?></label></p>
 						<?php } ?>
 					<?php } else { ?>
 						<input type="hidden" name="comments_reg" value="noreg">
@@ -39,8 +50,6 @@ $options = mso_get_option('tree_comments', 'plugins', array() ); // получа
 							</tr></table>
 						
 							<p class="hint"><?php
-								#echo ($options['tc_form_text1']);
-								
 								if (mso_get_option('new_comment_anonim_moderate', 'general', '1') ) {
 									$tc_form_text1 = $options['tc_form_text1'] . 'Ваш комментарий будет опубликован после проверки.';
 									echo $tc_form_text1;
@@ -58,17 +67,19 @@ $options = mso_get_option('tree_comments', 'plugins', array() ); // получа
 				
 					<?php if ( mso_get_option('allow_comment_anonim', 'general', '1') ) {	?>
 						<?php if (!$options['tc_compact_form']) { ?>
-						<p class="radio"><label><input type="radio" name="comments_reg" id="comments_reg_2" value="reg"> <?=t('Зарегистрирован или новая регистрация')?></label></p> 
+						<p class="radio"><label><input type="radio" name="comments_reg" id="comments_reg_2" value="reg" <?php if ($options['tc_form_reg']) echo 'checked="checked"'; ?>> <? echo $options['tc_form_text5']; ?></label></p> 
 						<?php } ?>
 					<?php } else { ?>
 						<input type="hidden" name="comments_reg" id="comments_reg_2" value="reg" checked="checked"> 
 					<?php } ?>
-				
+						
 						<table class="no-border">
-						<? #<tr class="r1"> ?>
-						<?	#<td class="t1"><label for="comusers_nik" class="comments_email"><?= t('Ник') ?><? #</label></td>?>
-						<?	#<td class="t2"><input type="text" name="comusers_nik" id="comusers_nik" value="" class="text" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"></td>?>
-						<?#</tr>?>						
+						<?php if ($options['tc_form_nik']) { ?>
+							<tr class="r1">
+								<td class="t1"><label for="comusers_nik" class="comments_email"><?= t('Ник') ?></label></td>
+								<td class="t2"><input type="text" name="comusers_nik" id="comusers_nik" value="" class="text" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"></td>
+							</tr>						
+						<?php } ?>
 						<tr class="r1">
 							<td class="t1"><label for="comments_email" class="comments_email"><?= t('E-mail*') ?></label></td>
 							<td class="t2"><input type="text" name="comments_email" id="comments_email" value="" class="text" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"></td>
@@ -77,10 +88,12 @@ $options = mso_get_option('tree_comments', 'plugins', array() ); // получа
 							<td class="t1"><label for="comments_password" class="comments_password"><?= t('Пароль*') ?></label></td>
 							<td class="t2"><input type="password" name="comments_password" id="comments_password" value="" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"></td>
 						</tr>
-						<? #<tr class="r1">?>
-						<? #<td class="t1"><label for="comusers_url" class="comments_email"><?= t('Сайт') ?><?#</label></td>?>
-						<? #<td class="t2"><input type="text" name="comusers_url" id="comusers_url" value="" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"></td>?>
-						<? #</tr>?>						
+						<?php if ($options['tc_form_url']) { ?>
+							<tr class="r1">
+								<td class="t1"><label for="comusers_url" class="comments_email"><?= t('Сайт') ?></label></td>
+								<td class="t2"><input type="text" name="comusers_url" id="comusers_url" value="" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"></td>
+							</tr>						
+						<?php } ?>
 						</table>
 				
 						<p class="hint"><? echo ($options['tc_form_text2']); ?></p>
