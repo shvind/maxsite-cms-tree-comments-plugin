@@ -99,9 +99,9 @@
 				$tree .= '&nbsp;<span class="tree-comment-author">' . $comments_url . '</span>';
 				// опциональная ссылка на комментарий
 				if (!isset($options['tc_comment_link'])) $options['tc_comment_link'] = 'date';
-				if ($options['tc_comment_link'] == 'date') $tree .= ' |&nbsp;<span class="tree-comment-date"><a href="' . $page_slug . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">' . $comments_date . '</a></span>';
+				if ($options['tc_comment_link'] == 'date') $tree .= ' |&nbsp;<span class="tree-comment-date"><a href="/page/' . $page_slug . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">' . $comments_date . '</a></span>';
 				else $tree .= '&nbsp;<span class="tree-comment-date">' . $comments_date . '</span>';
-				if ($options['tc_comment_link'] == 'text') $tree .= '&nbsp;<span class="tree-comment-meta"><a href="' . $page_slug . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">(ссылка)</a></span>';
+				if ($options['tc_comment_link'] == 'text') $tree .= '&nbsp;<span class="tree-comment-meta"><a href="/page/' . $page_slug . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">(ссылка)</a></span>';
 								
 				if (is_login()) 
 				{
