@@ -2,8 +2,8 @@
 
 $info = array(
 	'name' => 'Tree Comments',
-	'description' => 'Плагин древовидных комментариев на основе наработок Дмитрия aka d51x',
-	'version' => '0.1',
+	'description' => 'Плагин древовидных комментариев (использованы наработки d51x)',
+	'version' => '0.2',
 	'author' => 'Иван Швиндин',
 	'plugin_url' => 'http://shvind.ru/page/maxsite-tree-style-comments-plugin',
 	'author_url' => 'http://shvind.ru/',

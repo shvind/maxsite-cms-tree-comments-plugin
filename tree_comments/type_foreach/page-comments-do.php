@@ -23,6 +23,7 @@
 	echo $out;
 	
 	function  build_tree($parents, $parent_id){
+	$options = mso_get_option('tree_comments', 'plugins', array() ); // получаем опции
 		global $comms;
 		global $tree_comments_child_list;
 		$tree = '';
@@ -31,7 +32,12 @@
 			if ($users_id) $class = ' class="users"';
 			elseif ($comusers_id) $class = ' class="comusers"';
 			else $class = ' class="anonim"';
-			$comments_date = mso_date_convert('H:i d/m/Y', $comments_date);
+
+			$comments_date = mso_page_date($comments_date, 
+									array(	'format' => $options['tc_date_format'], // получаем формат даты
+											'days' => t('Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье'),
+											'month' => t('января февраля марта апреля мая июня июля августа сентября октября ноября декабря')), 
+									'', '' , false);	
 		
 			$data = array( 	'users_email' => $users_email,
 							'comusers_email' => $comusers_email,
@@ -65,20 +71,22 @@
 		}
 		
 		if ($avatar_url) 
+#			if ($options['tc_gravatar_noindex']) {
+#				$gravatar_noindex_do = '<span style="display: none"><![CDATA[<noindex>]]></span>';
+#				$gravatar_noindex_posle = '<span style="display: none"><![CDATA[</noindex>]]></span>';
+#			}
+#			$avatar_url = '<img src="' . $avatar_url . '" width="80" height="80" alt="" title="" style="float: left; margin: 5px 15px 10px 0;" class="gravatar">' . $gravatar_noindex_posle;
+			
 			$avatar_url = '<span style="display: none"><![CDATA[<noindex>]]></span><img src="' . $avatar_url . '" width="80" height="80" alt="" title="" style="float: left; margin: 5px 15px 10px 0;" class="gravatar"><span style="display: none"><![CDATA[</noindex>]]></span>';
 		
 			$tree .= '<li style="clear: both;"' . $class . '><div class="tree-comment">';
-			$tree .= '<div class="tree-comment-avatar">' . $avatar_url . '</div>';
-			$tree .= '<div class="tree-comment-data">';
-				//$tree .= '<span class="tree-comment-meta"><a href="#comment-' . $comments_id . '" name="comment-' . $comments_id . '">' . $comments_date . '</a></span>';
-				
-				// author
-				$tree .= '<span class="tree-comment-author">' . $comments_url . '</span>';
-				
-				$tree .= '&nbsp;<span class="tree-comment-meta">(' . $comments_date . ')</span>';
-				
-				
-
+			$tree .= '<div class="comment-info tree-comment">';
+				$tree .= '&nbsp;<span class="tree-comment-author">' . $comments_url . '</span>';
+				// опциональная ссылка на комментарий
+				if ($options['tc_comment_link'] == 'date') $tree .= '&nbsp;<span class="tree-comment-date"><a href="' . $page_slug . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">' . $comments_date . '</a></span>';
+				else $tree .= '&nbsp;<span class="tree-comment-date">' . $comments_date . '</span>';
+				if ($options['tc_comment_link'] == 'text') $tree .= '&nbsp;<span class="tree-comment-meta"><a href="' . $page_slug . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">(ссылка)</a></span>';
+								
 				if (is_login()) 
 				{
 					$edit_link = getinfo('siteurl') . 'admin/comments/edit/';
@@ -89,9 +97,14 @@
 					$tree .= ' | ';
 					$tree .= '<span class="tree-comment-moderate">Ожидает модерации</span>';			
 				}	
-				$tree .= '<span class="tree-comment-content">' . mso_comments_content($comments_content) . '</span>';	
+	
 			$tree .= '</div>';
 
+			$tree .= '<div class="comments_content tree-comment-data">';
+				$tree .= $avatar_url;
+				$tree .= mso_comments_content($comments_content);	
+			$tree .= '</div>';
+			
 			$tree .= '<div class="break"></div>';
 			$tree .= '<div class="comment-reply" id="comment-reply-' . $comments_id . '">';
 			$tree .= '<a class="comment-form-button" id="comment-form-button-' . $comments_id . '" type="button" name="comment-form-button-' . $comments_id . '" onclick="show_comment_form(' . $comments_id . ', ' . $page_id . ')">Ответить</a>';
