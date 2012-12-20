@@ -1,7 +1,8 @@
 div.comment-reply {text-align: right;}
 div.comment-form-comment {text-align: left;}
 
-div.comments div.comment-info {}
+div.comments div.comment-info {margin: 0;}
+div.comments div.comments_content {margin: 10px;}
 div.tree-comment {padding: 5px 0px !important; margin: 8px 0 10px 0; border-bottom: 1px solid #CCCCCC;}
 div.comment-form-comment div.comments-user {font-size: 0.8em; margin: 10px 0; padding: 10px; border: 1px solid silver; background: #F0F0F0; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; behavior: url(/PIE.php);}
 div.comment-form-comment div.comments-textarea {font-size: 0.8em; margin: 10px 0; padding: 10px; border: 1px solid silver; background: #F0F0F0; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; behavior: url(/PIE.php);}

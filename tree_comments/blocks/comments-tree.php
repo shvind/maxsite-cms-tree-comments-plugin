@@ -2,7 +2,8 @@
 
 	if (!$options['tc_tabs']) echo '<h3 class="comments">' . t('Комментариев') . ': ' . count($comments) . '</h3>';
 	
-	if ($page_comment_allow) echo '<div class="tabs-box tabs-visible" style="display: block;">';
+	#if ($page_comment_allow) 
+	echo '<div class="tabs-box tabs-visible" style="display: block;">';
 
 	$tree_comments_first_level = 'tree-comments-level-0';
 	global $tree_comments_child_list;
@@ -140,7 +141,7 @@
     }
 	#echo '</div>';
 	
-	if ($page_comment_allow) {
+	#if ($page_comment_allow) {
 		echo '<div class="break"></div>' . mso_get_val('leave_a_comment_start', '<h3 class="comments">') . mso_get_option('leave_a_comment', 'templates', t('Оставьте комментарий!')). mso_get_val('leave_a_comment_end', '</h3>');
 		
 		if (!isset($options['tc_form'])) $options['tc_form'] = '0';
@@ -152,11 +153,14 @@
 		}
 		else {
 			$fn1 = getinfo('template_dir') . 'type/page-comment-form.php';
-			$fn2 = getinfo('templates_dir') . 'default/type/page-comment-form.php';
+			$fn2 = getinfo('shared_dir') . 'type/page/units/page-comment-form.php';
+			$fn3 = getinfo('templates_dir') . 'default/type/page-comment-form.php';
+			
 			if ( file_exists($fn1) ) require($fn1);
 			elseif (file_exists($fn2)) require($fn2);
+			else if (file_exists($fn3)) require($fn3);
 		}
-	}
-	else echo '<div class="page_comments_count">Дальнейшее комментирование отключено.</div>';
+	#}
+	#else echo '<div class="page_comments_count">Дальнейшее комментирование отключено.</div>';
 	if ($options['tc_tabs']) echo '</div><!-- div tabs-box end -->';
 ?>

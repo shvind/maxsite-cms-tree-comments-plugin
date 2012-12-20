@@ -8,6 +8,7 @@
 	if (!isset($options['tc_block3'])) $options['tc_block3'] = 'comments-fb.php';
 	if (!isset($options['tc_tabs'])) $options['tc_tabs'] = '1';
 	
+	$url = getinfo('site_url') . 'page/' . $page['page_slug'];
 	#echo '</div>';
 	echo '<div class="comments tabs_widget tabs_widget_99">'; 
 	
@@ -17,7 +18,7 @@
 		#if ($options['tc_comments_vk']) 
 		echo '<li class="elem"><h3 class="comments">' . t('Вконтакте') . '</h3></li>';
 		#if ($options['tc_comments_fb']) 
-		echo '<li class="elem"><h3 class="comments">' . t('Facebook') . '</h3></li>';
+		echo '<li class="elem"><h3 class="comments">' . t('Facebook') . ': <fb:comments-count href=' . $url . '></fb:comments-count></h3></li>';
 		echo '</ul><div class="clearfix"></div>';
 	}
 	

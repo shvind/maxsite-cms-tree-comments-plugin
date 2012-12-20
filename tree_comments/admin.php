@@ -134,7 +134,7 @@
 		$form .= '<br>' . t('Пагинация комментариев (любое значение)');
 		$form .= '<p><strong>' . t('Кол-во:') . '</strong> <input name="f_tc_fb_limit" type="text" value="' . $options['tc_fb_limit'] . '"></p>';
 
-		$form .= '<br>' . t('Размер блока комментариев (обязательно, стандартно 660 пикселей).');
+		$form .= '<br>' . t('Размер блока комментариев (обязательно. стандартно default 660px, d2 650px).');
 		$form .= '<p><strong>' . t('Ширина:') . '</strong> <input name="f_tc_fb_width" type="text" value="' . $options['tc_fb_width'] . '"></p>';
 		
 		$form .= '<br><h2>Опции формы комментирования</h2>';

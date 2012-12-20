@@ -15,7 +15,6 @@
 			fjs.parentNode.insertBefore(js, fjs);
 			}(document, "script", "facebook-jssdk"));</script>';
 		
-		$url = getinfo('site_url') . 'page/' . $page['page_slug'] ;
 		echo '<div class="fb-comments" data-href="'. $url .'" data-num-posts="'. $options['tc_fb_limit'] .'" data-width="'. $options['tc_fb_width'] .'"></div>';
 		echo '</div>';
 ?>
