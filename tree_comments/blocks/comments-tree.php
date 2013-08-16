@@ -70,7 +70,7 @@
 				else 
 					$d = '';
 				
-				$avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id=" 
+				$avatar_url = "//www.gravatar.com/avatar.php?gravatar_id=" 
 						. md5($grav_email)
 						. "&amp;size="
 						. mso_get_option('gravatar_size', 'templates', '')
@@ -79,7 +79,7 @@
 		}
 		
 		if ($avatar_url) $avatar_url = '<img src="' . $avatar_url . '" width="'. mso_get_option('gravatar_size', 'templates', '') .'" height="'. mso_get_option('gravatar_size', 'templates', '') .'" alt="" title="" style="float: left; margin: 5px 15px 10px 0;" class="gravatar">';
-		else $avatar_url = '<img src="http://www.gravatar.com/avatar/19611d8a175e2e02905c608e04674349?size=' . mso_get_option('gravatar_size', 'templates', '') . '&d=mm" width="'. mso_get_option('gravatar_size', 'templates', '') .'" height="'. mso_get_option('gravatar_size', 'templates', '') .'" alt="" title="" style="float: left; margin: 5px 15px 10px 0;" class="gravatar">'; 
+		else $avatar_url = '<img src="//www.gravatar.com/avatar/19611d8a175e2e02905c608e04674349?size=' . mso_get_option('gravatar_size', 'templates', '') . '&d=mm" width="'. mso_get_option('gravatar_size', 'templates', '') .'" height="'. mso_get_option('gravatar_size', 'templates', '') .'" alt="" title="" style="float: left; margin: 5px 15px 10px 0;" class="gravatar">'; 
 
 			$tree .= '<li style="clear: both;"' . $class . '><div class="tree-comment">';
 			$tree .= '<div class="comment-info tree-comment">';
