@@ -21,6 +21,8 @@
 		$options['tc_vk_init']			= $post['f_tc_vk_init'];
 		$options['tc_fb_limit']			= $post['f_tc_fb_limit'];
 		$options['tc_fb_width']			= $post['f_tc_fb_width'];
+		$options['tc_dq_id']			= $post['f_tc_dq_id'];
+		$options['tc_dq_mobile']		= isset( $post['tc_dq_mobile'])		? 1 : 0;
 		$options['tc_form']				= isset( $post['f_tc_form'])		? 1 : 0;
 		$options['tc_form_reg']			= isset( $post['f_tc_form_reg'])	? 1 : 0;
 		$options['tc_form_nick']		= isset( $post['f_tc_form_nick'])	? 1 : 0;
@@ -49,6 +51,7 @@
 		if ( !isset($options['tc_block1']) )		$options['tc_block1']		= 'comments-tree.php';
 		if ( !isset($options['tc_block2']) )		$options['tc_block2']		= 'comments-vk.php';
 		if ( !isset($options['tc_block3']) )		$options['tc_block3']		= 'comments-fb.php';
+		if ( !isset($options['tc_block4']) )		$options['tc_block4']		= 'comments-dq.php';
 		if ( !isset($options['tc_tabs']) )			$options['tc_tabs']			= '1';
 		if ( !isset($options['tc_comment_link']) )	$options['tc_comment_link']	= 'none';
 		if ( !isset($options['tc_comment_date']) )	$options['tc_comment_date']	= 'j F Y в H:i:s';
@@ -59,6 +62,8 @@
 		if ( !isset($options['tc_vk_init']) )		$options['tc_vk_init']		= '1';
 		if ( !isset($options['tc_fb_limit']) )		$options['tc_fb_limit']		= '20';
 		if ( !isset($options['tc_fb_width']) )		$options['tc_fb_width']		= '660';
+		if ( !isset($options['tc_dq_id']) )			$options['tc_dq_id']		= '';
+		if ( !isset($options['tc_dq_mobile']) )		$options['tc_dq_mobile']	= '1';
 		if ( !isset($options['tc_form']) )			$options['tc_form']			= '0';
 		if ( !isset($options['tc_form_reg']) )		$options['tc_form_reg']		= '0';
 		if ( !isset($options['tc_form_nick']) )		$options['tc_form_nick']	= '0';
@@ -75,6 +80,7 @@
 					array(  'comments-tree.php' => 'Древовидные',
 							'comments-vk.php' => 'Вконтакте',
 							'comments-fb.php' => 'Facebook',
+							'comments-dq.php' => 'Disqus',
 							'0'	=> 'Не использовать'),
 					$options['tc_block1']).'</p>';
 		$form .= '<p style="padding-bottom:5px"><strong>#2: </strong>'. 
@@ -82,6 +88,7 @@
 					array(  'comments-tree.php' => 'Древовидные',
 							'comments-vk.php' => 'Вконтакте',
 							'comments-fb.php' => 'Facebook',
+							'comments-dq.php' => 'Disqus',
 							'0'	=> 'Не использовать'),
 					$options['tc_block2']).'</p>';
 		$form .= '<p style="padding-bottom:5px"><strong>#3: </strong>'. 
@@ -89,8 +96,17 @@
 					array(  'comments-tree.php' => 'Древовидные',
 							'comments-vk.php' => 'Вконтакте',
 							'comments-fb.php' => 'Facebook',
+							'comments-dq.php' => 'Disqus',
 							'0'	=> 'Не использовать'),
 					$options['tc_block3']).'</p>';
+		$form .= '<p style="padding-bottom:5px"><strong>#4: </strong>'. 
+				form_dropdown('f_tc_block4', 
+					array(  'comments-tree.php' => 'Древовидные',
+							'comments-vk.php' => 'Вконтакте',
+							'comments-fb.php' => 'Facebook',
+							'comments-dq.php' => 'Disqus',
+							'0'	=> 'Не использовать'),
+					$options['tc_block4']).'</p>';
 		$form .= '<br>';
 		
 		$chk = $options['tc_tabs'] ? ' checked="checked"  ' : '';
@@ -136,6 +152,14 @@
 
 		$form .= '<br>' . t('Размер блока комментариев (обязательно. стандартно default 660px, d2 650px).');
 		$form .= '<p><strong>' . t('Ширина:') . '</strong> <input name="f_tc_fb_width" type="text" value="' . $options['tc_fb_width'] . '"></p>';
+		
+		$form .= '<br><h2>Опции комментариев Disqus</h2>';
+
+		$form .= '<br>' . t('Идентификатор вашего сайта');
+		$form .= '<p><strong>' . t('Shortcode:') . '</strong> <input name="f_tc_dq_id" type="text" value="' . $options['tc_dq_id'] . '"></p>';
+
+		//$chk = $options['tc_dq_mobile'] ? ' checked="checked"  ' : '';
+		//$form .= '<br><p><label><input name="f_tc_dq_mobile" type="checkbox" ' . $chk . '> ' . t('Не использовать версию оптимизированную для мобильных устройств') . '</label><br>';
 		
 		$form .= '<br><h2>Опции формы комментирования</h2>';
 		
